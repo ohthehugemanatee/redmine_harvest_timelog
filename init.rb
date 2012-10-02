@@ -83,11 +83,11 @@ Dispatcher.to_prepare do
           harvest.request "/daily/update/#{time_entry.harvest_timelog_id}?of_user=#{harvest_user_id}", :post, request
         rescue Exception => e 
           response = harvest.request "/daily/add?of_user=#{harvest_user_id}", :post, request
-          time_entry.update_attribute :harvest_timelog_id, Hash.from_xml(response.body)['add']['day_entry']['id']
+          time_entry.update_attribute :harvest_timelog_id, Hash.from_xml(response.body)['timer']['day_entry']['id']
         end
       else
         response = harvest.request "/daily/add?of_user=#{harvest_user_id}", :post, request
-        time_entry.update_attribute :harvest_timelog_id, Hash.from_xml(response.body)['add']['day_entry']['id']
+        time_entry.update_attribute :harvest_timelog_id, Hash.from_xml(response.body)['timer']['day_entry']['id']
       end
     end
   end
